@@ -1,5 +1,5 @@
-manifest_csv: /Users/ilyamikheev/Documents/New project/artifacts/manifest.csv
-output_dir: /Users/ilyamikheev/Documents/New project/artifacts
+manifest_csv: /Users/ilyamikheev/Documents/meg_project/artifacts/manifest.csv
+output_dir: /Users/ilyamikheev/Documents/meg_project/artifacts
 
 meg_sfreq: 100.0
 l_freq: 1.0

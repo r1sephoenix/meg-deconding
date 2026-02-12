@@ -5,7 +5,7 @@
 ## Пайплайны
 - `baseline`: Ridge-регрессия `MEG -> mel spectrogram`
 - `train-megformer`: MEGFormer-like contrastive pipeline (`MEG embedding -> wav2vec2 embedding`)
-- `train-word-decoder`: sentence-level lexical decoder, адаптированный под протокол статьи Nature `s41467-025-65499-0`
+- `train-word-decoder`: sentence-level lexical decoder
 
 ## Установка
 ```bash
@@ -16,7 +16,7 @@ pip install -e .
 pip install -e .[deep]
 ```
 
-## 1) Baseline (MEG -> mel)
+## 1) Baseline
 
 Manifest (`CSV`):
 - `meg_path`
@@ -24,12 +24,11 @@ Manifest (`CSV`):
 - `start_s`
 - `end_s`
 
-Подготовка данных одной командой (скачать `.fif` из Google Drive + собрать `manifest.csv`):
 ```bash
 python scripts/prepare_baseline_data.py \
-  --audio-dir "/Users/ilyamikheev/Downloads/drive-download-20241028T122739Z-001 2" \
-  --meg-dir "/Users/ilyamikheev/Documents/New project/artifacts/raw_meg" \
-  --manifest-output "/Users/ilyamikheev/Documents/New project/artifacts/manifest.csv" \
+  --audio-dir "" \
+  --meg-dir "" \
+  --manifest-output "" \
   --strict
 ```
 
@@ -40,20 +39,20 @@ python scripts/fetch_drive_meg.py \
   --strict
 
 python scripts/build_manifest.py \
-  --meg-dir "/Users/ilyamikheev/Documents/New project/artifacts/raw_meg" \
-  --audio-dir "/Users/ilyamikheev/Downloads/drive-download-20241028T122739Z-001 2" \
-  --output "/Users/ilyamikheev/Documents/New project/artifacts/manifest.csv"
+  --meg-dir "/artifacts/raw_meg" \
+  --audio-dir ""
+  --output "/artifacts/manifest.csv"
 
-meg-decode baseline --config "/Users/ilyamikheev/Documents/New project/configs/baseline.yaml"
+meg-decode baseline --config "/configs/baseline.yaml"
 ```
 
-## 2) MEGFormer-like (contrastive)
+## 2) MEGFormer (contrastive)
 
 ```bash
-meg-decode train-megformer --config "/Users/ilyamikheev/Documents/New project/configs/deep/megformer.yaml"
+meg-decode train-megformer --config "/configs/deep/megformer.yaml"
 ```
 
-## 3) Word Decoder (адаптация под `s41467-025-65499-0`)
+## 3) Word Decoder 
 
 Реализовано в пайплайне:
 - окно 3 сек от onset слова
@@ -81,21 +80,13 @@ meg-decode train-megformer --config "/Users/ilyamikheev/Documents/New project/co
 ```bash
 python scripts/build_word_manifest.py \
   --input "/PATH/TO/RAW_WORD_EVENTS.tsv" \
-  --output "/Users/ilyamikheev/Documents/New project/artifacts/word_manifest.csv"
+  --output "/artifacts/word_manifest.csv"
 ```
 
 Обучение:
 ```bash
-meg-decode train-word-decoder --config "/Users/ilyamikheev/Documents/New project/configs/deep/word_decoder.yaml"
+meg-decode train-word-decoder --config "/configs/deep/word_decoder.yaml"
 ```
-
-Артефакты:
-- `artifacts/word_decoder/word_decoder_dascoli.pt`
-- `artifacts/word_decoder/word_decoder_history.json`
-- `artifacts/word_decoder/word_decoder_metrics.json`
-
-## Примечание по репликации
-Пайплайн выровнен по ключевым компонентам статьи, но это не bitwise-реплика исходного приватного кода/всех датасет-специфичных деталей.
 
 ## Проверка
 ```bash

@@ -1,5 +1,5 @@
-manifest_csv: /Users/ilyamikheev/Documents/New project/artifacts/word_manifest.csv
-output_dir: /Users/ilyamikheev/Documents/New project/artifacts/word_decoder
+manifest_csv: /Users/ilyamikheev/Documents/meg_project/artifacts/word_manifest.csv
+output_dir: /Users/ilyamikheev/Documents/meg_project/artifacts/word_decoder
 
 device: cpu
 meg_sfreq: 100.0
