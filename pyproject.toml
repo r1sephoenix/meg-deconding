@@ -1,5 +1,5 @@
 [project]
-name = "meg-speech-decode"
+name = "meg-decoding"
 version = "0.1.0"
 description = "Baseline pipeline for speech decoding from MEG recordings"
 readme = "README.md"

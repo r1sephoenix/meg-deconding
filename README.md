@@ -1,4 +1,4 @@
-# MEG Speech Decoding
+# MEG Decoding
 
 Проект с тремя пайплайнами для декодирования речи/лексики из MEG.
 
