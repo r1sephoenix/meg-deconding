@@ -1,0 +1,25 @@
+manifest_csv: /Users/ilyamikheev/Documents/New project/artifacts/word_manifest.csv
+output_dir: /Users/ilyamikheev/Documents/New project/artifacts/word_decoder
+
+device: cpu
+meg_sfreq: 100.0
+l_freq: 0.1
+h_freq: 60.0
+window_s: 3.0
+baseline_s: 0.5
+
+batch_size: 4
+epochs: 10
+lr: 0.0001
+weight_decay: 0.1
+cnn_hidden_dim: 256
+proj_dim: 1024
+sentence_layers: 8
+sentence_heads: 8
+sentence_dropout: 0.1
+temperature_init: 10.0
+bias_init: -10.0
+vocab_eval_size: 250
+max_words_per_sentence: 64
+random_seed: 42
+t5_model_name: t5-large
